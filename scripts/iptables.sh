@@ -68,5 +68,17 @@ $iptables -A OUTPUT -p udp -m udp --sport 53:65535 --dport 53 -m state --state N
 $iptables -I INPUT -p tcp --dport 443 -m string --string "Host: vk.com" --algo bm -j DROP
 $iptables -I INPUT -p tcp --dport 443 -m string --string "Host: ok.ru" --algo bm -j DROP
 
-#add route
-ip route add 192.168.0.0/24 dev enp0s8 
+#Create table 4 with current routes via other gw
+ip route flush table 4
+ip route show table main | grep -Ev ^default | while read ROUTE ; do ip route add table 4 $ROUTE ; done
+ip route add table 4 default via 10.13.236.10
+
+#Mark Packet on web ports
+iptables -t mangle -A PREROUTING -p tcp --dport 80   -s 192.168.0.0/24 -j MARK --set-mark 4
+iptables -t mangle -A PREROUTING -p tcp --dport 443  -s 192.168.0.0/24 -j MARK --set-mark 4
+
+#IP Route add marked to table 4
+ip rule add fwmark 4 table 4
+
+#default route for lannet
+ip route add 192.168.0.0/24 dev enp0s8
