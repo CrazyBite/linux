@@ -64,5 +64,9 @@ $iptables -I INPUT 1 -p tcp -m tcp --dport 22 -m state --state NEW,ESTABLISHED -
 $iptables -A OUTPUT -p tcp -m tcp --sport 53:65535 --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
 $iptables -A OUTPUT -p udp -m udp --sport 53:65535 --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
 
+#drop vk and ok
+$iptables -I INPUT -p tcp --dport 443 -m string --string "Host: vk.com" --algo bm -j DROP
+$iptables -I INPUT -p tcp --dport 443 -m string --string "Host: ok.ru" --algo bm -j DROP
+
 #add route
 ip route add 192.168.0.0/24 dev enp0s8 
