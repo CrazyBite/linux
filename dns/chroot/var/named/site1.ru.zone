@@ -1,0 +1,17 @@
+$TTL 86400
+@	IN     SOA     site1.ru. site1.ru.local. (
+                        2015092502
+                        43200
+                        3600
+                        3600000
+                        2592000 )
+
+        IN NS ns1.site1.ru.
+        IN NS ns2.site1.ru.
+        IN A 192.168.0.254
+        IN MX 10 mx.site1.ru.
+
+gate    IN A 192.168.0.254
+mx      IN A 192.168.0.250
+ns1     IN A 192.168.0.235
+ns2     IN A 192.168.0.231
