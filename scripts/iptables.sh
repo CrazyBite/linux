@@ -16,7 +16,7 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 # AntiSpoofing protection
 for x in lo enp0s3 enp0s8
 do
-echo 1 > /proc/sys/net/ipv4/conf/${x}/rp_filter
+	echo 1 > /proc/sys/net/ipv4/conf/${x}/rp_filter
 done
 
 # Here is the place to define some variables
