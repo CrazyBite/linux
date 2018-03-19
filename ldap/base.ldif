@@ -1,0 +1,17 @@
+dn: dc=sbor2,dc=local
+dc: sbor2
+objectClass: top
+objectClass: domain
+
+dn: cn=ldapadm ,dc=sbor2,dc=local
+objectClass: organizationalRole
+cn: ldapadm
+description: LDAP Manager
+
+dn: ou=People,dc=sbor2,dc=local
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=sbor2,dc=local
+objectClass: organizationalUnit
+ou: Group
